@@ -91,6 +91,8 @@ GEM
     debug (1.9.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    doorkeeper (5.6.8)
+      railties (>= 5)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -239,6 +241,7 @@ DEPENDENCIES
   base32
   bootsnap
   debug
+  doorkeeper
   dotenv-rails
   email_validator
   importmap-rails

@@ -1,6 +1,6 @@
 # Image Sync
 
-## Monolith
+## Web Monolith
 ### Dependencies
 The monolith depends on the following dependencies:
 * Ruby 3.3.0
