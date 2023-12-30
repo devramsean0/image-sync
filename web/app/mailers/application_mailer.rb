@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "image-sync@sean.cyou"
+  default from: ENV['MAILER_DEFAULT_FROM']
   layout "mailer"
 end
