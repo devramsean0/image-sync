@@ -8,4 +8,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   # root "posts#index"
+
+  resource :auth, only: %i[show create destroy], controller: :auth
+  resource :auth_verifications, only: %i[show create]
+
+  root "user#index"
 end

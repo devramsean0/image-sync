@@ -77,6 +77,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.6)
       public_suffix (>= 2.0.2, < 6.0)
+    base32 (0.3.4)
     base64 (0.2.0)
     bigdecimal (3.1.5)
     bindex (0.8.1)
@@ -96,6 +97,8 @@ GEM
       railties (>= 3.2)
     drb (2.2.0)
       ruby2_keywords
+    email_validator (2.2.4)
+      activemodel
     erubi (1.12.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -196,6 +199,7 @@ GEM
     reline (0.4.1)
       io-console (~> 0.5)
     rexml (3.2.6)
+    rotp (6.3.0)
     ruby2_keywords (0.0.5)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
@@ -232,15 +236,18 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  base32
   bootsnap
   debug
   dotenv-rails
+  email_validator
   importmap-rails
   jbuilder
   letter_opener_web (~> 2.0)
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.2)
+  rotp
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 2.1)

@@ -64,3 +64,9 @@ end
 
 
 gem "tailwindcss-rails", "~> 2.1"
+# Random Codes
+gem "rotp"
+gem "base32"
+
+# Validators
+gem 'email_validator'

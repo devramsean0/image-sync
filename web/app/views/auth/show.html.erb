@@ -1,0 +1,13 @@
+<p>
+  What’s your email?
+</p>
+<%= form_with(url: auth_path, html: { data: { turbo: false } }) do |f| %>
+  <br />
+  <%= f.email_field :email, value: params[:email], placeholder: "you@email.com" %>
+  <% if @display_name_fields %>
+    <%= f.text_field :first_name, placeholder: "First name" %>
+    <%= f.text_field :last_name, placeholder: "Last name" %>
+  <% end %>
+  <br />
+  <%= f.submit "Continue" %>
+<% end %>
