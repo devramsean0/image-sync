@@ -33,3 +33,10 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Misc
+%ProgramData%/
+
+# Builds
+android/
+ios/
