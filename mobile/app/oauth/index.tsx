@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as WebBrowser from 'expo-web-browser';
+import * as SecureStore from 'expo-secure-store';
 import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
-import { Button } from 'react-native';
+import { Button, Platform } from 'react-native';
 
 WebBrowser.maybeCompleteAuthSession();
 const discovery = {
@@ -24,18 +25,24 @@ export default function Page() {
         discovery
     )
     React.useEffect(() => {
-        if (response?.type === 'success') {
-          const { code } = response.params;
+        if (response && response.type === 'success') {
+          const auth = response.params;
+          const storageValue = JSON.stringify(auth);
+          if (Platform.OS !== 'web') {
+            SecureStore.setItemAsync('auth', storageValue)
+          }
         }
       }, [response]);
-    
+      
       return (
-        <Button
-          disabled={!request}
-          title="Login"
-          onPress={() => {
-            promptAsync();
-          }}
-        />
+        <>
+          <Button
+            disabled={!request}
+            title="Login"
+            onPress={() => {
+              promptAsync();
+            }}
+          />
+        </>
       );
 }
