@@ -6,7 +6,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "desktop",
+    "productName": "Image Sync Desktop",
     "version": "0.0.0"
   },
   "tauri": {
@@ -36,7 +36,7 @@
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "desktop",
+        "title": "Image Sync Desktop",
         "width": 800,
         "height": 600
       }
