@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install Ruby & gems  
-        uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+        uses: ruby/setup-ruby@360dc864d5da99d54fcb8e9148c14a84b90d3e88
         with:
           bundler-cache: true
       - name: Setup DB
