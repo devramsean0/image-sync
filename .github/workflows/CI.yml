@@ -39,7 +39,7 @@ jobs:
         working-directory: ./mobile
     strategy:
       matrix:
-        os: [ ios, android ]
+        os: [ android ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -55,13 +55,16 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EAS_TOKEN }}
       - name: Install JDK v17
+        if: matrix.os == 'android'
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
       - name: Install Android SDK
+        if: matrix.os == 'android'
         uses: android-actions/setup-android@v3
       - name: Install Xcode
+        if: matrix.os == 'ios'
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: latest-stable
