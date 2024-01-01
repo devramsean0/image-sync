@@ -28,8 +28,43 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-      - name:
+      - name: Install Dependencies
         run: bundle install
       - name: Setup DB
         run: bin/rails db:prepare
-
+  mobile:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./mobile
+    strategy:
+      matrix:
+        os: [ ios, android ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
+        run: yarn install
+      - name: Install JDK v17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Install Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Prebuild
+        run: yarn expo prebuild
+      - name: Build Android
+        if: matrix.os == 'android'
+        run: yarn expo run:android --variant release
+      - name: Build iOS
+        if: matrix.os == 'ios'
+        run: yarn expo run:ios --configuration Release
