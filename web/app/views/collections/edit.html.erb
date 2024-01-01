@@ -1,0 +1,10 @@
+<h2>Edit collection <%= @collection.id %></h2>
+<%= form_with url: collection_path(@collection), local: true , method: :put do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name, value: @collection.name %>
+
+    <%= form.label :public %>
+    <%= form.check_box :public, checked: @collection.public ? true : false %>
+
+    <%= form.submit %>
+<% end %>

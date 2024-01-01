@@ -1,0 +1,11 @@
+<h2>New collection</h2>
+
+<%= form_with url: collections_path, local: true , method: :post do |form| %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+
+    <%= form.label :public %>
+    <%= form.check_box :public %>
+
+    <%= form.submit %>
+<% end %>

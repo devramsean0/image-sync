@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_30_120226) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_01_113723) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collections", force: :cascade do |t|
+    t.string "name"
+    t.string "S3_folder_path"
+    t.string "slug"
+    t.boolean "public"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_collections_on_user_id"
+  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
@@ -67,6 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_30_120226) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "collections", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_grants", "users", column: "resource_owner_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"

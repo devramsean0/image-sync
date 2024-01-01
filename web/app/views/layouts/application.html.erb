@@ -17,6 +17,19 @@
         <%= msg %>
       </div>
     <% end %>
+    <header>
+      <h1>Image Sync</h1>
+      <nav>
+        <% if user_signed_in? %>
+          <%= link_to "Collections", collections_path %>
+          <% if current_user.admin? %>
+            <%= link_to "Oauth Applications", oauth_applications_path %>
+          <% end %>
+        <% else %>
+          <%= link_to "Sign In", auth_path %>
+        <% end %>
+      </nav>
+    </header>
     <main>
       <%= yield %>
     </main>

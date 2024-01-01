@@ -14,6 +14,9 @@ class User < ApplicationRecord
       foreign_key: :resource_owner_id,
       dependent: :delete_all # or :destroy if you need callbacks
 
+    has_many :collections,
+      dependent: :delete_all
+    
     def self.generate_auth_salt
         ROTP::Base32.random(16)
       end

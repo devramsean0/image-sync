@@ -1,0 +1,5 @@
+<h2>Collection <%= @collection.id %></h2>
+<h3><%= @collection.name %></h3>
+<p><%= @collection.public ? "Public" : "Private" %></p>
+
+<%= link_to "Back", collections_path %>
