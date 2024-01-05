@@ -73,3 +73,6 @@ gem 'email_validator'
 
 # Oauth Authentication (for client applications)
 gem 'doorkeeper'
+
+# Rest
+gem 'rest-client'

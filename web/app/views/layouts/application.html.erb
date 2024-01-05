@@ -12,24 +12,22 @@
   </head>
 
   <body>
-  <% flash.each do |type, msg| %>
+    <header class="grid grid-cols-2 grid-rows-1">
+      <h1 className="text-4xl">Image Sync</h1>
+      <% if current_user %>
+      <div class="flex flex-row justify-end">
+        <%= link_to inline_icon("plus", size: 48), "#" %>
+        <%= link_to inline_icon("notification", size: 48), "#" %>
+        <%= link_to inline_icon("profile", size: 48), "#" %>
+        <%= link_to inline_icon("settings", size: 48), "#" %>
+      </div>
+      <% end %>
+    </header>
+    <% flash.each do |type, msg| %>
       <div>
         <%= msg %>
       </div>
     <% end %>
-    <header>
-      <h1>Image Sync</h1>
-      <nav>
-        <% if user_signed_in? %>
-          <%= link_to "Collections", collections_path %>
-          <% if current_user.admin? %>
-            <%= link_to "Oauth Applications", oauth_applications_path %>
-          <% end %>
-        <% else %>
-          <%= link_to "Sign In", auth_path %>
-        <% end %>
-      </nav>
-    </header>
     <main>
       <%= yield %>
     </main>

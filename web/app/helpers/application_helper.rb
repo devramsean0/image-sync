@@ -1,14 +1,17 @@
 module ApplicationHelper
-    def inline_icon(filename, options = {})
-    # cache parsed SVG files to reduce file I/O operations
+  require 'rest-client'
+  def inline_icon(filename, options = {})
     @icon_svg_cache ||= {}
-    if !@icon_svg_cache.key?(filename)
-      file = File.read(Rails.root.join("app", "assets", "images", "icons", "#{filename}.svg"))
-      @icon_svg_cache[filename] = Nokogiri::HTML::DocumentFragment.parse file
-    end
+    options[:color] ||= "black"
+    @icon_svg_cache[options[:color]] ||= {}
 
-    doc = @icon_svg_cache[filename].dup
+    if !@icon_svg_cache[options[:color]].key?(filename)
+      file = RestClient.get("https://icons.hackclub.com/api/icons/#{options[:color]}/#{filename}")
+      @icon_svg_cache[options[:color]][filename] = Nokogiri::HTML::DocumentFragment.parse file
+    end
+    doc = @icon_svg_cache[options[:color]][filename].dup
     svg = doc.at_css "svg"
+    options[:size] ||= 32
     options[:style] ||= ""
     if options[:size]
       options[:width] ||= options[:size]
