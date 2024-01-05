@@ -13,7 +13,7 @@
 
   <body>
     <header class="grid grid-cols-2 grid-rows-1">
-      <h1 className="text-4xl">Image Sync</h1>
+      <h1 class="text-4xl">Image Sync</h1>
       <% if current_user %>
       <div class="flex flex-row justify-end">
         <%= link_to inline_icon("plus", size: 48), "#" %>
@@ -31,5 +31,10 @@
     <main>
       <%= yield %>
     </main>
+    <div class="absolute inset-x-9 bottom-0 text-center">
+      &copy; <%= Date.today.year %> Sean Outram & Image Sync contributors.
+      <div class="flex flex-row justify-center">
+        <%= link_to inline_icon("github", size: 48), "https://github.com/devramsean0/image-sync" %>
+    </div>
   </body>
 </html>
