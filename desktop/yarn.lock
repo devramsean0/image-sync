@@ -553,9 +553,9 @@
   integrity sha512-SYRedJi+mweatroB+6TTnJYLts0L0bosg531xnQWtklOI6dezEagx4Q0qDyvRdK+qgdA3YZpjjGuPFtxBmddBA==
 
 "@solidjs/router@^0.10.5":
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/@solidjs/router/-/router-0.10.5.tgz#e459e2b4ae3acde6fbb3766f277b818af57c40ef"
-  integrity sha512-gxDeiyc97j8/UqzuuasZsQYA7jpmlwjkfpcay11Q2xfzoKR50eBM1AaxAPtf0MlBAdPsdPV3h/k8t5/XQCuebA==
+  version "0.10.6"
+  resolved "https://registry.yarnpkg.com/@solidjs/router/-/router-0.10.6.tgz#1c2174f2d30767ad12ff4267a6d2df5deae24b1f"
+  integrity sha512-PiJO/wsAh0+0mmAIw/+gGgZa0xeMzKGrITWvBfNQ0wiAwNzOF/T0Bm10uhyaWdxPu9td0xK2LuMnC//4CXqnyA==
 
 "@tauri-apps/api@^1.5.2":
   version "1.5.3"
