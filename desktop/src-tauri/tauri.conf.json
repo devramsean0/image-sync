@@ -17,6 +17,14 @@
         "open": true
       }
     },
+    "updater": {
+      "active": true,
+      "endpoints": [
+        "https://releases.sean.cyou/check?project=imageSync&target={{target}}&arch={{arch}}&current_version={{current_version}}"
+      ],
+      "dialog": true,
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDEyNDgzRTBEQ0JFNEUxQTEKUldTaDRlVExEVDVJRXJEYWwvUXhEOXBRcUlZOEdwSW9BdUpwTHlDU3BMaCtKZllpV1hhUXVZcVkK"
+    },
     "bundle": {
       "active": true,
       "targets": "all",

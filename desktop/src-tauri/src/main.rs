@@ -20,6 +20,26 @@ async fn authenticate(handle: tauri::AppHandle) {
 async fn main() {
     let state = utils::auth::init().await;
     tauri::Builder::default()
+    .setup(|app| {
+        let handle = app.handle();
+            tauri::async_runtime::spawn(async move {
+                match handle
+                    .updater()
+                    .header("Release-Channel", "development") 
+                    .unwrap()
+                    .check()
+                    .await
+                {
+                    Ok(update) => {
+                        update.download_and_install().await;
+                    }
+                    Err(e) => {
+                        println!("ERROR: {}", e);
+                    }
+                }
+                });
+            Ok(())
+        })
         .manage(state)
         .invoke_handler(tauri::generate_handler![authenticate])
         .run(tauri::generate_context!())
