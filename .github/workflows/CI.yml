@@ -101,7 +101,7 @@ jobs:
     - name: Install frontend dependencies
       run: yarn install
     - name: Append Development version to version string
-      run: node ../scripts/subsituteGitSHAIntoCargoVersion.js
+      run: node ../scripts/updateDevVersion.js
     - name: Build Tauri
       run: yarn tauri build
       env:
