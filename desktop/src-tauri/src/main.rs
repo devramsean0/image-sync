@@ -31,7 +31,7 @@ async fn main() {
                     .await
                 {
                     Ok(update) => {
-                        update.download_and_install().await;
+                        let _ = update.download_and_install().await;
                     }
                     Err(e) => {
                         println!("ERROR: {}", e);
