@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { execSync } = require('child_process')
 
-const tauriConfPath = 'desktop/src-tauri/tauri.conf.json';
+const tauriConfPath = `${process.cwd()}/desktop/src-tauri/tauri.conf.json`;
 
 // Read the tauri.conf.json file
 fs.readFile(tauriConfPath, 'utf8', (err, data) => {
