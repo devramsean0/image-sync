@@ -35,20 +35,29 @@ then
     echo "Yarn installed"
 fi
 
+# Rust
+echo "Checking if Rust is installed"
+if ! command -v rustup &> /dev/null
+then
+    echo "Rust not installed, installing"
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    echo "Rust installed"
+fi
+
 #     #
 # Web #
 #     #
 
 # Install Ruby version
+cd web
 echo "Installing Ruby version..."
-RUBY_VERSION=$(cat .ruby-version)
+RUBY_VERSION=$(cat ../.ruby-version)
 rvm fetch $RUBY_VERSION
 rvm install $RUBY_VERSION
 echo "Finished installing Ruby version!"
 
 # Install Ruby gems
 echo "Installing Ruby gems..."
-cd web
 gem install foreman
 bundle install
 echo "Finished installing Ruby gems!"
@@ -81,5 +90,14 @@ echo "Finished installing NPM packages"
 echo "Prebuilding Native projects"
 yarn expo prebuild
 echo "Finished prebuilding"
+
+#         #
+# Desktop #
+#         #
+
+cd ../desktop
+echo "Installing NPM packages"
+yarn install
+echo "Finished installing NPM packages"
 
 echo "You can use the following commands to run the monolith: web/bin/dev after using docker-compose to start the Postgres container"

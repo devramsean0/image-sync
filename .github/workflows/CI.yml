@@ -101,10 +101,9 @@ jobs:
     - name: Install frontend dependencies
       run: yarn install
     - name: Append Development version to version string
-      run: node ../scripts/subsituteGitSHAIntoCargoVersion.js
+      run: node ../scripts/updateDevVersion.js
     - name: Build Tauri
-      uses: tauri-apps/tauri-action@v0.4.5
+      run: yarn tauri build
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TAURI_PRIVATE_KEY: ${{ secrets.TAURI_UPDATER_PRIVATE_KEY }}
         TAURI_KEY_PASSWORD: ${{ secrets.TAURI_UPDATER_PASSWORD }}
