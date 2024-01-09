@@ -553,9 +553,9 @@
   integrity sha512-1Qf/qk/iEtx0aOi+AQQt5PBoW0mFngsm7bPuxHClC/hWh2hHBktR6ktSfUg5b5rC9v8hTwNmHE7lBWXkgqluUQ==
 
 "@solidjs/router@^0.10.5":
-  version "0.10.6"
-  resolved "https://registry.yarnpkg.com/@solidjs/router/-/router-0.10.6.tgz#1c2174f2d30767ad12ff4267a6d2df5deae24b1f"
-  integrity sha512-PiJO/wsAh0+0mmAIw/+gGgZa0xeMzKGrITWvBfNQ0wiAwNzOF/T0Bm10uhyaWdxPu9td0xK2LuMnC//4CXqnyA==
+  version "0.10.7"
+  resolved "https://registry.yarnpkg.com/@solidjs/router/-/router-0.10.7.tgz#6ba3edcc3c0f054f68fc50bd1898024c7eca0816"
+  integrity sha512-3sSy3nNy5qQ1TFNwJ4zpFS/M8kiSoSu9ucQwsfaLY5Yo14r5rVArtkkHA+1gtlFeG0K/Dc2iduLLs1u1QChnRQ==
 
 "@tauri-apps/api@^1.5.2":
   version "1.5.3"
@@ -1376,10 +1376,15 @@ semver@^6.3.1:
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.3.1.tgz#556d2ef8689146e46dcea4bfdd095f3434dffcb4"
   integrity sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==
 
-seroval@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/seroval/-/seroval-1.0.2.tgz#ec5f5026239ed0d6935139482353d9648e875835"
-  integrity sha512-buswWxRzf65ZGUk8MAf3qVtBJHbe5gq6hZyPeqlJCKEIl/tEhUZze0YJg7vB7tFRGgPeneRaP083OB/vDiYLvA==
+seroval-plugins@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/seroval-plugins/-/seroval-plugins-1.0.3.tgz#1bf0111e5c2e4dc4e4b9749accacf302170d63f9"
+  integrity sha512-/nda3/5lVpznsbsliN8SNbx075VH6nO6lCpIknLxOPUtfqXA5ji30ThFjQD1PNed3Dnxkkj8raK/WtS8PbEuKQ==
+
+seroval@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/seroval/-/seroval-1.0.3.tgz#b589901b82507f1705824beed128eebdccfdc4dc"
+  integrity sha512-v5Psun3O2OdehTS/BpTC9EezHxyQRM4lqtvOdbngEq8qOZUECqG5XaoFNZgBQrJKXZFgcyZtMH6Dv7G96pKSSQ==
 
 shebang-command@^2.0.0:
   version "2.0.0"
@@ -1399,12 +1404,13 @@ signal-exit@^4.0.1:
   integrity sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==
 
 solid-js@^1.7.8:
-  version "1.8.8"
-  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.8.8.tgz#14a7e3e59677628bce6ef1ebb18e8c64fd4f1ddb"
-  integrity sha512-9CtL5xWTYX1WWjQKqht3Tl0AJzgz4YWVQk8hoscO9TzRCgzlpAauEOexXa6bPG30W+fWLnFVE7XUiAzQFNeUKw==
+  version "1.8.9"
+  resolved "https://registry.yarnpkg.com/solid-js/-/solid-js-1.8.9.tgz#92184263c90b1d34db09240e1cdd5f530f1bc892"
+  integrity sha512-Y/CabO6gY6QIBjXnHDLBjn4oznhw9h8BtttVAuLCYsVEs5Ler5pfE5def/HZ9RZOTUdcbqk7HwZE5nFw8xKufA==
   dependencies:
     csstype "^3.1.0"
-    seroval "^1.0.2"
+    seroval "^1.0.3"
+    seroval-plugins "^1.0.3"
 
 solid-refresh@^0.5.3:
   version "0.5.3"
@@ -1421,6 +1427,7 @@ source-map-js@^1.0.2:
   integrity sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==
 
 "string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
+  name string-width-cjs
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -1439,6 +1446,7 @@ string-width@^5.0.1, string-width@^5.1.2:
     strip-ansi "^7.0.1"
 
 "strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+  name strip-ansi-cjs
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
