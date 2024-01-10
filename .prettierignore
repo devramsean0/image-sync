@@ -1,0 +1,74 @@
+web/.bundle
+
+# Ignore all environment files (except templates).
+web/.env*
+!web/.env*.erb
+!web/.env.example
+
+# Ignore all logfiles and tempfiles.
+web/log/**/*
+web/tmp/**/*
+!web/log/.keep
+!web/tmp/.keep
+
+# Ignore pidfiles, but keep the directory.
+web/tmp/pids/*
+!web/tmp/pids/
+!web/tmp/pids/.keep
+
+# Ignore storage (uploaded files in development and any SQLite databases).
+web/storage/*
+!web/storage/.keep
+web/tmp/storage/*
+!web/tmp/storage/
+!web/tmp/storage/.keep
+
+web/public/assets
+
+# Ignore master key for decrypting credentials and more.
+web/config/master.key
+
+web/app/assets/builds/*
+!web/app/assets/builds/.keep
+
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# Native
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+*.pem
+
+# local env files
+.env*.local
+
+# typescript
+*.tsbuildinfo
+
+# Misc
+%ProgramData%/
+
+# Builds
+android/
+ios/
+
+target/

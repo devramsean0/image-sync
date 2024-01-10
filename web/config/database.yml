@@ -1,18 +1,18 @@
 # config/database.yml
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: <%= ENV['DB_URL'] %>
+    adapter: postgresql
+    encoding: unicode
+    pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+    url: <%= ENV['DB_URL'] %>
 
 development:
-  <<: *default
-  database: image-sync_development
+    <<: *default
+    database: image-sync_development
 
 test:
-  <<: *default
-  database: image-sync_test
+    <<: *default
+    database: image-sync_test
 
 production:
-  <<: *default
-  database: image-sync_production
+    <<: *default
+    database: image-sync_production

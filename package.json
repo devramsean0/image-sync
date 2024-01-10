@@ -1,0 +1,16 @@
+{
+    "name": "image-sync",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/devramsean0/image-sync",
+    "author": "Sean Outram <outramsean0@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "@prettier/plugin-ruby": "^4.0.4",
+        "prettier": "3.1.1"
+    },
+    "dependencies": {
+        "prettier-plugin-rust": "^0.1.9"
+    }
+}

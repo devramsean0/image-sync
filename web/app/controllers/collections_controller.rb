@@ -2,7 +2,8 @@ class CollectionsController < ApplicationController
     def index
         @collections = current_user.collections
     end
-    def new; end
+    def new
+    end
     def create
         collection = current_user.collections.create(params.permit(:name, :public))
         if collection
