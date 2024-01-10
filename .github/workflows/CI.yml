@@ -17,7 +17,7 @@ jobs:
             - name: Install node dependencies
               run: yarn
             - name: Run prettier
-              run: yarn prettier . --check
+              run: npx prettier --check --ignore-unknown .
     web:
         runs-on: ubuntu-latest
         defaults:
