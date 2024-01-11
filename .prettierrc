@@ -3,5 +3,5 @@
     "tabWidth": 4,
     "printWidth": 100,
     "endOfLine": "lf",
-    "plugins": ["@prettier/plugin-ruby", "prettier-plugin-rust"]
+    "plugins": ["@prettier/plugin-ruby"]
 }
