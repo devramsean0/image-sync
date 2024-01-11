@@ -72,3 +72,4 @@ android/
 ios/
 
 target/
+desktop/src-tauri/

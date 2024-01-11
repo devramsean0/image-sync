@@ -14,8 +14,14 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: "20.x"
+            - name: Install Ruby
+              uses: ruby/setup-ruby@v1
+              with:
+                  bundler-cache: true
             - name: Install node dependencies
               run: yarn
+            - name: Install ruby dependencies
+              run: cd web && bundle install
             - name: Run prettier
               run: npx prettier --check --ignore-unknown .
     web:
