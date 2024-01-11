@@ -76,12 +76,12 @@ jobs:
             - name: Download node dependencies cache
               uses: actions/cache@v3
               with:
-                  path: node_modules/
+                  path: mobile/node_modules/
                   key: ${{ runner.os }}-mobile-node-deps
             - name: Download Android prebuild cache
               uses: actions/cache@v3
               with:
-                  path: android
+                  path: mobile/android
                   key: ${{ runner.os }}-mobile-prebuild-android
             - name: Download IOS prebuild cache
               uses: actions/cache@v3
@@ -138,7 +138,7 @@ jobs:
             - name: Download node dependencies cache
               uses: actions/cache@v3
               with:
-                  path: deskop/node_modules/
+                  path: desktop/node_modules/
                   key: ${{ runner.os }}-desktop-node-deps
             - name: Download target/
               uses: actions/cache@v3
