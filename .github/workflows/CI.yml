@@ -1,109 +1,128 @@
 name: "Dev CI"
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    push:
+        branches: ["main"]
+    pull_request:
+        branches: ["main"]
 jobs:
-  web:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./web
-    services:
-      postgres:
-        image: postgres:latest
-        ports:
-          - "5432:5432"
+    code-quality:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Install Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.x"
+            - name: Install Ruby
+              uses: ruby/setup-ruby@v1
+              with:
+                  bundler-cache: true
+            - name: Install node dependencies
+              run: yarn
+            - name: Install ruby dependencies
+              run: cd web && bundle install
+            - name: Run prettier
+              run: npx prettier --check --ignore-unknown .
+    web:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: ./web
+        services:
+            postgres:
+                image: postgres:latest
+                ports:
+                    - "5432:5432"
+                env:
+                    POSTGRES_USER: postgres
+                    POSTGRES_PASSWORD: password
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-    env:
-      RAILS_ENV: test
-      DB_URL: "postgres://postgres:password@localhost:5432"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Ruby 
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-      - name: Install Dependencies
-        run: bundle install
-      - name: Setup DB
-        run: bin/rails db:prepare
-  mobile:
-    runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: ./mobile
-    strategy:
-      matrix:
-        os: [ android ]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-      - name: Install dependencies
-        run: yarn install
-      - name: Setup EAS
-        uses: expo/expo-github-action@v8
-        with:
-          eas-version: latest
-          token: ${{ secrets.EAS_TOKEN }}
-      - name: Install JDK v17
-        if: matrix.os == 'android'
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Install Android SDK
-        if: matrix.os == 'android'
-        uses: android-actions/setup-android@v3
-      - name: Install Xcode
-        if: matrix.os == 'ios'
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: latest-stable
-      - name: Build Android
-        if: matrix.os == 'android'
-        run: eas build --platform android --profile production --non-interactive --local
-      - name: Build iOS
-        if: matrix.os == 'ios'
-        run: eas build --platform ios --profile production --non-interactive --local
-      
-  desktop:
-    defaults:
-      run:
-        working-directory: ./desktop
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [macos-latest, ubuntu-latest, windows-latest]
-    runs-on: ${{ matrix.platform }}
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-    - name: Install Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.x'
-    - name: Install Rust
-      uses: dtolnay/rust-toolchain@stable
-    - name: Install dependencies (ubuntu only)
-      if: matrix.platform == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev
-    - name: Install frontend dependencies
-      run: yarn install
-    - name: Append Development version to version string
-      run: node ../scripts/updateDevVersion.js
-    - name: Build Tauri
-      run: yarn tauri build
-      env:
-        TAURI_PRIVATE_KEY: ${{ secrets.TAURI_UPDATER_PRIVATE_KEY }}
-        TAURI_KEY_PASSWORD: ${{ secrets.TAURI_UPDATER_PASSWORD }}
+            RAILS_ENV: test
+            DB_URL: "postgres://postgres:password@localhost:5432"
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Install Ruby
+              uses: ruby/setup-ruby@v1
+              with:
+                  bundler-cache: true
+            - name: Install Dependencies
+              run: bundle install
+            - name: Setup DB
+              run: bin/rails db:prepare
+    mobile:
+        runs-on: macos-latest
+        defaults:
+            run:
+                working-directory: ./mobile
+        strategy:
+            matrix:
+                os: [android]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Install Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.x"
+            - name: Install dependencies
+              run: yarn install
+            - name: Setup EAS
+              uses: expo/expo-github-action@v8
+              with:
+                  eas-version: latest
+                  token: ${{ secrets.EAS_TOKEN }}
+            - name: Install JDK v17
+              if: matrix.os == 'android'
+              uses: actions/setup-java@v4
+              with:
+                  java-version: "17"
+                  distribution: "temurin"
+            - name: Install Android SDK
+              if: matrix.os == 'android'
+              uses: android-actions/setup-android@v3
+            - name: Install Xcode
+              if: matrix.os == 'ios'
+              uses: maxim-lobanov/setup-xcode@v1
+              with:
+                  xcode-version: latest-stable
+            - name: Build Android
+              if: matrix.os == 'android'
+              run: eas build --platform android --profile production --non-interactive --local
+            - name: Build iOS
+              if: matrix.os == 'ios'
+              run: eas build --platform ios --profile production --non-interactive --local
+
+    desktop:
+        defaults:
+            run:
+                working-directory: ./desktop
+        strategy:
+            fail-fast: false
+            matrix:
+                platform: [macos-latest, ubuntu-latest, windows-latest]
+        runs-on: ${{ matrix.platform }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Install Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.x"
+            - name: Install Rust
+              uses: dtolnay/rust-toolchain@stable
+            - name: Install dependencies (ubuntu only)
+              if: matrix.platform == 'ubuntu-latest'
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev
+            - name: Install frontend dependencies
+              run: yarn install
+            - name: Append Development version to version string
+              run: node ../scripts/updateDevVersion.js
+            - name: Build Tauri
+              run: yarn tauri build
+              env:
+                  TAURI_PRIVATE_KEY: ${{ secrets.TAURI_UPDATER_PRIVATE_KEY }}
+                  TAURI_KEY_PASSWORD: ${{ secrets.TAURI_UPDATER_PASSWORD }}
