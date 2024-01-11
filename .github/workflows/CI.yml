@@ -81,12 +81,12 @@ jobs:
             - name: Download Android prebuild cache
               uses: actions/cache@v3
               with:
-                  path: mobile/android
+                  path: mobile/android/
                   key: ${{ runner.os }}-mobile-prebuild-android
             - name: Download IOS prebuild cache
               uses: actions/cache@v3
               with:
-                  path: ios
+                  path: mobile/ios/
                   key: ${{ runner.os }}-mobile-prebuild-ios
             - name: Install dependencies
               run: yarn install
