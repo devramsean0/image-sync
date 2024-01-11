@@ -31,7 +31,7 @@ jobs:
               run: npx prettier --check --ignore-unknown .
     web:
         runs-on: ubuntu-latest
-        depends-on: code-quality
+        needs: code-quality
         defaults:
             run:
                 working-directory: ./web
@@ -59,7 +59,7 @@ jobs:
               run: bin/rails db:prepare
     mobile:
         runs-on: macos-latest
-        depends-on: code-quality
+        needs: code-quality
         defaults:
             run:
                 working-directory: ./mobile
@@ -117,7 +117,7 @@ jobs:
               run: eas build --platform ios --profile production --non-interactive --local
 
     desktop:
-        depends-on: code-quality
+        needs: code-quality
         defaults:
             run:
                 working-directory: ./desktop
