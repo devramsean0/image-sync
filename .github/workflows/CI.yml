@@ -138,12 +138,12 @@ jobs:
             - name: Download node dependencies cache
               uses: actions/cache@v3
               with:
-                  path: node_modules/
+                  path: deskop/node_modules/
                   key: ${{ runner.os }}-desktop-node-deps
             - name: Download target/
               uses: actions/cache@v3
               with:
-                  path: src-tauri/target
+                  path: desktop/src-tauri/target
                   key: ${{ runner.os }}-${{ matrix.platform }}-desktop-rust-target
             - name: Install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-latest'
