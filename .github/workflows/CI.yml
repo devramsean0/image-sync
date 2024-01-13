@@ -18,6 +18,11 @@ jobs:
               uses: ruby/setup-ruby@v1
               with:
                   bundler-cache: true
+            - name: Download node dependencies cache
+              uses: actions/cache@v3
+              with:
+                  path: node_modules/
+                  key: ${{ runner.os}}-CC-node-deps
             - name: Install node dependencies
               run: yarn
             - name: Install ruby dependencies
@@ -26,6 +31,7 @@ jobs:
               run: npx prettier --check --ignore-unknown .
     web:
         runs-on: ubuntu-latest
+        needs: code-quality
         defaults:
             run:
                 working-directory: ./web
@@ -53,6 +59,7 @@ jobs:
               run: bin/rails db:prepare
     mobile:
         runs-on: macos-latest
+        needs: code-quality
         defaults:
             run:
                 working-directory: ./mobile
@@ -66,6 +73,21 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: "20.x"
+            - name: Download node dependencies cache
+              uses: actions/cache@v3
+              with:
+                  path: mobile/node_modules/
+                  key: ${{ runner.os }}-mobile-node-deps
+            - name: Download Android prebuild cache
+              uses: actions/cache@v3
+              with:
+                  path: mobile/android/
+                  key: ${{ runner.os }}-mobile-prebuild-android
+            - name: Download IOS prebuild cache
+              uses: actions/cache@v3
+              with:
+                  path: mobile/ios/
+                  key: ${{ runner.os }}-mobile-prebuild-ios
             - name: Install dependencies
               run: yarn install
             - name: Setup EAS
@@ -95,6 +117,7 @@ jobs:
               run: eas build --platform ios --profile production --non-interactive --local
 
     desktop:
+        needs: code-quality
         defaults:
             run:
                 working-directory: ./desktop
@@ -112,6 +135,16 @@ jobs:
                   node-version: "20.x"
             - name: Install Rust
               uses: dtolnay/rust-toolchain@stable
+            - name: Download node dependencies cache
+              uses: actions/cache@v3
+              with:
+                  path: desktop/node_modules/
+                  key: ${{ runner.os }}-desktop-node-deps
+            - name: Download target/
+              uses: actions/cache@v3
+              with:
+                  path: desktop/src-tauri/target
+                  key: ${{ runner.os }}-${{ matrix.platform }}-desktop-rust-target
             - name: Install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-latest'
               run: |
