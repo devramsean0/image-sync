@@ -4,6 +4,7 @@ on:
         branches: ["main"]
     pull_request:
         branches: ["main"]
+    workflow_dispatch:
 jobs:
     code-quality:
         runs-on: ubuntu-latest
@@ -145,6 +146,49 @@ jobs:
               with:
                   path: desktop/src-tauri/target
                   key: ${{ runner.os }}-${{ matrix.platform }}-desktop-rust-target
+            - name: Install dependencies (ubuntu only)
+              if: matrix.platform == 'ubuntu-latest'
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev libappindicator3-dev librsvg2-dev
+            - name: Install frontend dependencies
+              run: yarn install
+            - name: Append Development version to version string
+              run: node ../scripts/updateDevVersion.js
+            - name: Build Tauri
+              run: yarn tauri build
+              env:
+                  TAURI_PRIVATE_KEY: ${{ secrets.TAURI_UPDATER_PRIVATE_KEY }}
+                  TAURI_KEY_PASSWORD: ${{ secrets.TAURI_UPDATER_PASSWORD }}
+    desktop-lite:
+        needs: code-quality
+        defaults:
+            run:
+                working-directory: ./desktop-lite
+        strategy:
+            fail-fast: false
+            matrix:
+                platform: [macos-latest, ubuntu-latest, windows-latest]
+        runs-on: ${{ matrix.platform }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+            - name: Install Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20.x"
+            - name: Install Rust
+              uses: dtolnay/rust-toolchain@stable
+            - name: Download node dependencies cache
+              uses: actions/cache@v3
+              with:
+                  path: desktop/node_modules/
+                  key: ${{ runner.os }}-desktop_lite-node-deps
+            - name: Download target/
+              uses: actions/cache@v3
+              with:
+                  path: desktop/src-tauri/target
+                  key: ${{ runner.os }}-${{ matrix.platform }}-desktop_lite-rust-target
             - name: Install dependencies (ubuntu only)
               if: matrix.platform == 'ubuntu-latest'
               run: |
