@@ -1,0 +1,3 @@
+{
+    "ignoredFiles": ["desktop/src-tauri/icons/**", "desktop-lite/src-tauri/icons/**"]
+}
