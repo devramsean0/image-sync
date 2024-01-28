@@ -1,0 +1,4 @@
+<%= form_with url: auth_verify_path do |form| %>
+  <%= form.text_field :code, placeholder: "123456" %>
+  <%= form.submit "Send Code" %>
+<% end %>

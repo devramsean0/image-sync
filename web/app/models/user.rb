@@ -15,6 +15,7 @@ class User < ApplicationRecord
                       dependent: :delete_all # or :destroy if you need callbacks
 
     has_many :collections, dependent: :delete_all
+    has_many :user_sessions, dependent: :delete_all
 
     def self.generate_auth_salt
         ROTP::Base32.random(16)
