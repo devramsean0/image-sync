@@ -1,4 +1,8 @@
-<%= form_with url: auth_verify_path do |form| %>
-  <%= form.text_field :code, placeholder: "123456" %>
-  <%= form.submit "Send Code" %>
+<%= form_with url: auth_verify_path, class: "flex flex-col gap-2" do |form| %>
+  <div>
+    <%= form.label :code, "Enter the code we emailed to you: " %>
+    <br />
+    <%= form.text_field :code, placeholder: "123456", class: "rounded-xl" %>
+  </div>
+  <%= form.submit "Send Code", class: "p-3 px-5 rounded-xl bg-blue-500 text-white" %>
 <% end %>

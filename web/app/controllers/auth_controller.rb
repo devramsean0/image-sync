@@ -1,6 +1,7 @@
 class AuthController < ApplicationController
     skip_before_action :authenticate_user!
     def start
+        render layout: "auth"
     end
 
     def code
@@ -17,13 +18,13 @@ class AuthController < ApplicationController
         user_session = UserSession.generate(user)
         session[:auth_cookie] = user_session.cookie
         AuthMailer.auth_code(user, user_session.email_code).deliver_now
+        render layout: "auth"
     rescue ActiveRecord::RecordInvalid => e
         @show_additional_fields = true
-        render :start
+        render :start, layout: "auth"
     end
 
     def verify
-        puts "session: #{session[:auth_cookie]}"
         user_session = UserSession.find_by(cookie: session[:auth_cookie])
         if user_session.present?
             if (params[:code].present? && user_session.email_code == params[:code])

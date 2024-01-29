@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <header class="grid grid-cols-2 grid-rows-1">
+      <h1 class="text-4xl">Image Sync</h1>
+    </header>
+    <section class="flex flex-col items-center gap-4">
+      <img src="/Logo-Normal.svg" alt="Image Sync Logo" width="20%" height="20%"/>
+      <% flash.each do |type, msg| %>
+        <div>
+          <%= msg %>
+        </div>
+      <% end %>
+      <br />
+      <main>
+        <%= yield %>
+      </main>
+    </section>
+    <div class="absolute inset-x-9 bottom-0 text-center">
+      &copy; <%= Date.today.year %> Sean Outram & Image Sync contributors.
+      <div class="flex flex-row justify-center">
+        <%= link_to inline_icon("github", size: 48), "https://github.com/devramsean0/image-sync" %>
+    </div>
+  </body>
+</html>
