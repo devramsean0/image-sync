@@ -59,7 +59,7 @@ jobs:
             - name: Setup DB
               run: bin/rails db:prepare
     mobile:
-        runs-on: macos-latest
+        runs-on: macos-14
         needs: code-quality
         defaults:
             run:
@@ -125,7 +125,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                platform: [macos-latest, ubuntu-latest, windows-latest]
+                platform: [macos-14, ubuntu-latest, windows-latest]
         runs-on: ${{ matrix.platform }}
         steps:
             - name: Checkout
