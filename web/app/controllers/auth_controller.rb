@@ -16,7 +16,7 @@ class AuthController < ApplicationController
                 )
         end
         user_session = UserSession.generate(user)
-        session[:auth_cookie] = user_session.cookie
+        cookies.encrypted[:auth_cookie] = { value: user_session.cookie, expires: 31.days.from_now }
         AuthMailer.auth_code(user, user_session.email_code).deliver_now
         render layout: "auth"
     rescue ActiveRecord::RecordInvalid => e
@@ -25,7 +25,7 @@ class AuthController < ApplicationController
     end
 
     def verify
-        user_session = UserSession.find_by(cookie: session[:auth_cookie])
+        user_session = UserSession.find_by(cookie: cookies.encrypted[:auth_cookie])
         if user_session.present?
             if (params[:code].present? && user_session.email_code == params[:code])
                 user_session.update(authenticated: true)

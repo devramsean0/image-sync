@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-    get "auth/start"
-    get "auth/code"
-    get "auth/verify"
+  use_doorkeeper_device_authorization_grant
     use_doorkeeper
     mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
     scope "auth" do
-        get "/" => "auth#start"
-        get "code" => "auth#code"
-        post "verify" => "auth#verify"
+        get "start" => "auth#start", as: :auth_start
+        get "code" => "auth#code", as: :auth_code
+        post "verify" => "auth#verify", as: :auth_verify
     end
     resources :collections
 

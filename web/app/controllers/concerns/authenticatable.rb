@@ -18,7 +18,7 @@ module Authenticatable
     private
 
     def lookup_user_by_cookie
-        user_session = UserSession.find_by(cookie: session[:auth_cookie])
+        user_session = UserSession.find_by(cookie: cookies.encrypted[:auth_cookie])
         if user_session.present? && user_session.authenticated
             user_session.user
         else
