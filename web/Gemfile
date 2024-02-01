@@ -78,4 +78,4 @@ gem "syntax_tree-haml", "~> 4.0"
 gem "syntax_tree-rbs", "~> 1.0"
 
 gem "rest-client", "~> 2.1"
-gem 'doorkeeper-device_authorization_grant'
+gem "doorkeeper-device_authorization_grant"
