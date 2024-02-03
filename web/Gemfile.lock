@@ -54,6 +54,9 @@ GEM
     activejob (7.1.2)
       activesupport (= 7.1.2)
       globalid (>= 0.3.6)
+    activejob-retry (0.6.3)
+      activejob (>= 4.2)
+      activesupport (>= 4.2)
     activemodel (7.1.2)
       activesupport (= 7.1.2)
     activerecord (7.1.2)
@@ -85,6 +88,7 @@ GEM
     bootsnap (1.17.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    chronic (0.10.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -226,6 +230,8 @@ GEM
     rexml (3.2.6)
     rotp (6.3.0)
     ruby2_keywords (0.0.5)
+    solid_queue (0.2.1)
+      rails (~> 7.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -267,12 +273,15 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     zeitwerk (2.6.12)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  activejob-retry
   base32
   bootsnap
   debug
@@ -289,6 +298,7 @@ DEPENDENCIES
   rails (~> 7.1.2)
   rest-client (~> 2.1)
   rotp
+  solid_queue (~> 0.2.1)
   sprockets-rails
   stimulus-rails
   syntax_tree (~> 6.2)
@@ -298,6 +308,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  whenever
 
 RUBY VERSION
    ruby 3.3.0p0
