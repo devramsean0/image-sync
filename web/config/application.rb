@@ -38,5 +38,6 @@ module Web
 
         # Don't generate system test files.
         config.generators.system_tests = nil
+        config.log_level = :info
     end
 end
