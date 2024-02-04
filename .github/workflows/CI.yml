@@ -30,9 +30,34 @@ jobs:
               run: cd web && bundle install
             - name: Run prettier
               run: npx prettier --check --ignore-unknown .
-    web:
+    change-filter:
         runs-on: ubuntu-latest
         needs: code-quality
+        outputs:
+            web: ${{ steps.change-filter.outputs.web }}
+            mobile: ${{ steps.change-filter.outputs.mobile }}
+            desktop: ${{ steps.change-filter.outputs.desktop }}
+            desktop-lite: ${{ steps.change-filter.outputs.desktop-lite }}
+        steps:
+            - uses: actions/checkout@v3
+            - uses: dorny/paths-filter@v2
+              id: changes
+              with:
+                  filters: |
+                      web:
+                        - 'web/**'
+                      mobile:
+                        - 'mobile/**'
+                      desktop:
+                        - 'desktop/**'
+                        - 'rust-lib/**'
+                      desktop-lite:
+                        - 'desktop-lite/**'
+                        - 'rust-lib/**'
+    web:
+        runs-on: ubuntu-latest
+        needs: change-filter
+        if: ${{ needs.changes.outputs.web == 'true' }}
         defaults:
             run:
                 working-directory: ./web
@@ -60,7 +85,8 @@ jobs:
               run: bin/rails db:prepare
     mobile:
         runs-on: macos-14
-        needs: code-quality
+        needs: change-filter
+        if: ${{ needs.changes.outputs.mobile == 'true' }}
         defaults:
             run:
                 working-directory: ./mobile
@@ -118,7 +144,8 @@ jobs:
               run: eas build --platform ios --profile production --non-interactive --local
 
     desktop:
-        needs: code-quality
+        needs: change-filter
+        if: ${{ needs.changes.outputs.desktop == 'true' }}
         defaults:
             run:
                 working-directory: ./desktop
@@ -161,7 +188,8 @@ jobs:
                   TAURI_PRIVATE_KEY: ${{ secrets.TAURI_UPDATER_PRIVATE_KEY }}
                   TAURI_KEY_PASSWORD: ${{ secrets.TAURI_UPDATER_PASSWORD }}
     desktop-lite:
-        needs: code-quality
+        needs: change-filter
+        if: ${{ needs.changes.outputs.desktop-lite == 'true' }}
         defaults:
             run:
                 working-directory: ./desktop-lite
