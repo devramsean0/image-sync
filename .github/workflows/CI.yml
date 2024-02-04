@@ -56,7 +56,7 @@ jobs:
                         - 'rust-lib/**'
     web:
         runs-on: ubuntu-latest
-        needs: change-filter
+        needs: changes
         if: ${{ needs.changes.outputs.web == 'true' }}
         defaults:
             run:
@@ -85,7 +85,7 @@ jobs:
               run: bin/rails db:prepare
     mobile:
         runs-on: macos-14
-        needs: change-filter
+        needs: changes
         if: ${{ needs.changes.outputs.mobile == 'true' }}
         defaults:
             run:
@@ -144,7 +144,7 @@ jobs:
               run: eas build --platform ios --profile production --non-interactive --local
 
     desktop:
-        needs: change-filter
+        needs: changes
         if: ${{ needs.changes.outputs.desktop == 'true' }}
         defaults:
             run:
@@ -188,7 +188,7 @@ jobs:
                   TAURI_PRIVATE_KEY: ${{ secrets.TAURI_UPDATER_PRIVATE_KEY }}
                   TAURI_KEY_PASSWORD: ${{ secrets.TAURI_UPDATER_PASSWORD }}
     desktop-lite:
-        needs: change-filter
+        needs: changes
         if: ${{ needs.changes.outputs.desktop-lite == 'true' }}
         defaults:
             run:
