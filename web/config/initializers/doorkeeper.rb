@@ -4,22 +4,25 @@ Doorkeeper.configure do
     # Change the ORM that doorkeeper will use (requires ORM extensions installed).
     # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
     orm :active_record
-    default_scopes :collections, :images
+    optional_scopes :image_read, :image_write, :collection_read, :collection_write
     enforce_configured_scopes
     # This block will be called to check whether the resource owner is authenticated or not.
     resource_owner_authenticator do
         # Put your resource owner authentication logic here.
         # Example implementation:
         #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
-        User.find_by(id: session[:user_id]) || redirect_to(auth_path)
+        UserSession.find_by(cookie: cookies.encrypted[:auth_cookie]).user || redirect_to(auth_path)
     end
-
+    grant_flows %w[device_flow authorization_code client_credential]
     # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
     # file then you need to declare this block in order to restrict access to the web interface for
     # adding oauth authorized applications. In other case it will return 403 Forbidden response
     # every time somebody will try to access the admin web interface.
     #
-    admin_authenticator { User.find_by(id: session[:user_id]).admin? || redirect_to(auth_path) }
+    admin_authenticator do
+        UserSession.find_by(cookie: cookies.encrypted[:auth_cookie]).user.admin ||
+            redirect_to(auth_path)
+    end
 
     # You can use your own model classes if you need to extend (or even override) default
     # Doorkeeper models such as `Application`, `AccessToken` and `AccessGrant.

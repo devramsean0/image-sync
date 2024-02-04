@@ -76,3 +76,10 @@ gem "prettier_print", "~> 1.2"
 gem "syntax_tree", "~> 6.2"
 gem "syntax_tree-haml", "~> 4.0"
 gem "syntax_tree-rbs", "~> 1.0"
+
+gem "rest-client", "~> 2.1"
+gem "doorkeeper-device_authorization_grant"
+
+gem "solid_queue", "~> 0.2.1"
+gem "whenever"
+gem 'activejob-retry'

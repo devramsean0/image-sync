@@ -14,23 +14,19 @@
   <body>
     <header class="grid grid-cols-2 grid-rows-1">
       <h1 class="text-4xl">Image Sync</h1>
-      <% if true %>
-      <div class="flex flex-row justify-end">
-        <%= link_to inline_icon("plus", size: 48), "#" %>
-        <%= link_to inline_icon("notification", size: 48), "#" %>
-        <%= link_to inline_icon("profile", size: 48), "#" %>
-        <%= link_to inline_icon("settings", size: 48), "#" %>
-      </div>
-      <% end %>
     </header>
-    <% flash.each do |type, msg| %>
-      <div>
-        <%= msg %>
-      </div>
-    <% end %>
-    <main>
-      <%= yield %>
-    </main>
+    <section class="flex flex-col items-center gap-4">
+      <img src="/Logo-Normal.svg" alt="Image Sync Logo" width="20%" height="20%"/>
+      <% flash.each do |type, msg| %>
+        <div>
+          <%= msg %>
+        </div>
+      <% end %>
+      <br />
+      <main>
+        <%= yield %>
+      </main>
+    </section>
     <div class="absolute inset-x-9 bottom-0 text-center">
       &copy; <%= Date.today.year %> Sean Outram & Image Sync contributors.
       <div class="flex flex-row justify-center">

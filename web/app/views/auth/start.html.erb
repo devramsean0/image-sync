@@ -1,0 +1,22 @@
+<%= form_with url: auth_code_path, method: "get", class: "flex flex-col gap-2" do |form| %>
+  <div>
+    <%= form.label :email, "Enter your email: " %>
+    <br />
+    <%= form.email_field :email, value: params[:email], placeholder: "you@email.com", class: "rounded-xl" %>
+  </div>
+  <% if @show_additional_fields %>
+    <hr />
+    <div>
+      <%= form.label :first_name, "First name" %>
+      <br />
+      <%= form.text_field :first_name, value: params[:name], placeholder: "John", class: "rounded-xl" %>
+    </div>
+    <div>
+      <%= form.label :last_name, "Last name" %>
+      <br />
+      <%= form.text_field :last_name, value: params[:name], placeholder: "Doe", class: "rounded-xl" %>
+    </div>
+    <hr />
+  <% end %>
+  <%= form.submit "Send Code", class: "p-3 px-5 rounded-xl bg-blue-500 text-white" %>
+<% end %>

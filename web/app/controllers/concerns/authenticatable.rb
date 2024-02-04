@@ -4,7 +4,7 @@ module Authenticatable
     included { helper_method :user_signed_in?, :current_user }
 
     def authenticate_user!
-        redirect_to auth_path unless user_signed_in?
+        redirect_to auth_start_path unless user_signed_in?
     end
 
     def user_signed_in?
@@ -18,6 +18,11 @@ module Authenticatable
     private
 
     def lookup_user_by_cookie
-        User.find(session[:user_id]) if session[:user_id]
+        user_session = UserSession.find_by(cookie: cookies.encrypted[:auth_cookie])
+        if user_session.present? && user_session.authenticated
+            user_session.user
+        else
+            nil
+        end
     end
 end
