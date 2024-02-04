@@ -28,7 +28,7 @@ jobs:
               run: yarn
             - name: Install ruby dependencies
               run: cd web && bundle install
-            - name: Ru n prettier
+            - name: Run prettier
               run: npx prettier --check --ignore-unknown .
     changes:
         runs-on: ubuntu-latest
