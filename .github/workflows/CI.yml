@@ -20,7 +20,7 @@ jobs:
               with:
                   bundler-cache: true
             - name: Download node dependencies cache
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: node_modules/
                   key: ${{ runner.os}}-CC-node-deps
@@ -28,7 +28,7 @@ jobs:
               run: yarn
             - name: Install ruby dependencies
               run: cd web && bundle install
-            - name: Run prettier
+            - name: Ru n prettier
               run: npx prettier --check --ignore-unknown .
     changes:
         runs-on: ubuntu-latest
@@ -101,17 +101,17 @@ jobs:
               with:
                   node-version: "20.x"
             - name: Download node dependencies cache
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: mobile/node_modules/
                   key: ${{ runner.os }}-mobile-node-deps
             - name: Download Android prebuild cache
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: mobile/android/
                   key: ${{ runner.os }}-mobile-prebuild-android
             - name: Download IOS prebuild cache
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: mobile/ios/
                   key: ${{ runner.os }}-mobile-prebuild-ios
@@ -164,12 +164,12 @@ jobs:
             - name: Install Rust
               uses: dtolnay/rust-toolchain@stable
             - name: Download node dependencies cache
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: desktop/node_modules/
                   key: ${{ runner.os }}-desktop-node-deps
             - name: Download target/
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: desktop/src-tauri/target
                   key: ${{ runner.os }}-${{ matrix.platform }}-desktop-rust-target
@@ -208,12 +208,12 @@ jobs:
             - name: Install Rust
               uses: dtolnay/rust-toolchain@stable
             - name: Download node dependencies cache
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: desktop/node_modules/
                   key: ${{ runner.os }}-desktop_lite-node-deps
             - name: Download target/
-              uses: actions/cache@v3
+              uses: actions/cache@v4
               with:
                   path: desktop/src-tauri/target
                   key: ${{ runner.os }}-${{ matrix.platform }}-desktop_lite-rust-target
