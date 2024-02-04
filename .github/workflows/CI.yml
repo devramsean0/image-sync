@@ -57,7 +57,7 @@ jobs:
     web:
         runs-on: ubuntu-latest
         needs: change-filter
-        if: ${{ needs.changes.outputs.web == 'true' }}
+        if: ${{ needs.changes.outputs.web == true }}
         defaults:
             run:
                 working-directory: ./web
@@ -86,7 +86,7 @@ jobs:
     mobile:
         runs-on: macos-14
         needs: change-filter
-        if: ${{ needs.changes.outputs.mobile == 'true' }}
+        if: ${{ needs.changes.outputs.mobile == true }}
         defaults:
             run:
                 working-directory: ./mobile
@@ -145,7 +145,7 @@ jobs:
 
     desktop:
         needs: change-filter
-        if: ${{ needs.changes.outputs.desktop == 'true' }}
+        if: ${{ needs.changes.outputs.desktop == true }}
         defaults:
             run:
                 working-directory: ./desktop
@@ -189,7 +189,7 @@ jobs:
                   TAURI_KEY_PASSWORD: ${{ secrets.TAURI_UPDATER_PASSWORD }}
     desktop-lite:
         needs: change-filter
-        if: ${{ needs.changes.outputs.desktop-lite == 'true' }}
+        if: ${{ needs.changes.outputs.desktop-lite == true }}
         defaults:
             run:
                 working-directory: ./desktop-lite
