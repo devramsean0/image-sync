@@ -30,14 +30,14 @@ jobs:
               run: cd web && bundle install
             - name: Run prettier
               run: npx prettier --check --ignore-unknown .
-    change-filter:
+    changes:
         runs-on: ubuntu-latest
         needs: code-quality
         outputs:
-            web: ${{ steps.change-filter.outputs.web }}
-            mobile: ${{ steps.change-filter.outputs.mobile }}
-            desktop: ${{ steps.change-filter.outputs.desktop }}
-            desktop-lite: ${{ steps.change-filter.outputs.desktop-lite }}
+            web: ${{ steps.changes.outputs.web }}
+            mobile: ${{ steps.changes.outputs.mobile }}
+            desktop: ${{ steps.changes.outputs.desktop }}
+            desktop-lite: ${{ steps.changes.outputs.desktop-lite }}
         steps:
             - uses: actions/checkout@v3
             - uses: dorny/paths-filter@v2
