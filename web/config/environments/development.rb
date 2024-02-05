@@ -76,4 +76,5 @@ Rails.application.configure do
     config.action_mailer.perform_deliveries = true
     config.hosts = nil
     config.assets.debug = true
+    config.active_storage.service = :local
 end

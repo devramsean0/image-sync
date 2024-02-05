@@ -83,3 +83,7 @@ gem "doorkeeper-device_authorization_grant"
 gem "solid_queue", "~> 0.2.1"
 gem "whenever"
 gem 'activejob-retry'
+
+gem "image_processing", "~> 1.12"
+
+gem "aws-sdk-s3", "~> 1.143"
