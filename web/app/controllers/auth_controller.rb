@@ -17,7 +17,7 @@ class AuthController < ApplicationController
         end
         user_session = UserSession.generate(user)
         cookies.encrypted[:auth_cookie] = { value: user_session.cookie, expires: 1.month.from_now }
-        AuthMailer.auth_code(user, user_session.email_code).deliver_now
+        AuthMailer.auth_code(user, user_session.email_code).deliver_later
         render layout: "auth"
     rescue ActiveRecord::RecordInvalid => e
         @show_additional_fields = true

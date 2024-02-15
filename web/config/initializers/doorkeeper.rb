@@ -13,7 +13,7 @@ Doorkeeper.configure do
         #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
         UserSession.find_by(cookie: cookies.encrypted[:auth_cookie]).user || redirect_to(auth_path)
     end
-    grant_flows %w[device_flow authorization_code client_credential]
+    grant_flows %w[device_flow, authorization_code, client_credential]
     # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
     # file then you need to declare this block in order to restrict access to the web interface for
     # adding oauth authorized applications. In other case it will return 403 Forbidden response
@@ -21,7 +21,7 @@ Doorkeeper.configure do
     #
     admin_authenticator do
         UserSession.find_by(cookie: cookies.encrypted[:auth_cookie]).user.admin ||
-            redirect_to(auth_path)
+            redirect_to(auth_start_path)
     end
 
     # You can use your own model classes if you need to extend (or even override) default
