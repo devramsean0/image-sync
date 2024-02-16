@@ -40,7 +40,7 @@ jobs:
             desktop-lite: ${{ steps.changes.outputs.desktop-lite }}
         steps:
             - uses: actions/checkout@v4
-            - uses: dorny/paths-filter@v2
+            - uses: dorny/paths-filter@v3
               id: changes
               with:
                   filters: |
