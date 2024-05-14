@@ -1,0 +1,6 @@
+{
+    "name": "lib",
+    "description": "Shared code lib, written in rust with bindings for JS. Intended for any shared code",
+    "private": true,
+    "main": "dist/index.node"
+}
